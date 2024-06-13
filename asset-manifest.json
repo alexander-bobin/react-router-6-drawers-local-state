@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/react-router-6-drawers-local-state/static/css/main.89a7b3cf.css",
+    "main.js": "/react-router-6-drawers-local-state/static/js/main.22cf2e38.js",
+    "static/js/453.1ddf69ae.chunk.js": "/react-router-6-drawers-local-state/static/js/453.1ddf69ae.chunk.js",
+    "static/media/drawers-are-a-step.png": "/react-router-6-drawers-local-state/static/media/drawers-are-a-step.b5b8c1d40977a5cbe497.png",
+    "static/media/drawers-are-not-a-step.png": "/react-router-6-drawers-local-state/static/media/drawers-are-not-a-step.6186ac462b7f932123e8.png",
+    "index.html": "/react-router-6-drawers-local-state/index.html",
+    "main.89a7b3cf.css.map": "/react-router-6-drawers-local-state/static/css/main.89a7b3cf.css.map",
+    "main.22cf2e38.js.map": "/react-router-6-drawers-local-state/static/js/main.22cf2e38.js.map",
+    "453.1ddf69ae.chunk.js.map": "/react-router-6-drawers-local-state/static/js/453.1ddf69ae.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.89a7b3cf.css",
+    "static/js/main.22cf2e38.js"
+  ]
+}
