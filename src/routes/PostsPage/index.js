@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData, Outlet } from "react-router-dom";
 import UsersFilter from "./UsersFilter";
-import DrawerLink from "../../common/components/LinkToDrawer";
-import useGetUrlWithCurrentSearchParams from "../../common/utils/useGetUrlWithCurrentSearchParams";
+import LinkButton from "../../common/components/LinkButton";
+import PostsSettingsDrawer from "./SettingsDrawer";
+import useDisclosure from "../../common/utils/useDisclosure";
 
 function PostList ({ posts }) {
   return (
@@ -25,12 +26,14 @@ function PostList ({ posts }) {
 
 function PostsPage () {
   const data = useLoaderData()
-  const settingsUrl = useGetUrlWithCurrentSearchParams('./settings', ['userId'])
+  const { getDisclosureProps, getTriggerProps } = useDisclosure({ id: 'posts-settings-drawer' })
+
   return (
     <>
+      <PostsSettingsDrawer {...getDisclosureProps()}/>
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Posts</h2>
-        <p><DrawerLink to={settingsUrl}>Settings ⚙️</DrawerLink></p>
+        <p><LinkButton {...getTriggerProps()}>Settings ⚙️</LinkButton></p>
       </div>
       <div className="mt-4">
         <Suspense fallback={<p className="text-slate-500">...</p>}>

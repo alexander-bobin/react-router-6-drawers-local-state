@@ -15,7 +15,6 @@ import PostPage from './routes/PostPage'
 import postPageLoader from './routes/PostPage/loader'
 import PostPageCommentDrawer from './routes/PostPageCommentsDrawer'
 import postPageCommentsDrawerLoader from './routes/PostPageCommentsDrawer/loader'
-import PostsSettingsDrawer from './routes/PostsSettingsDrawer'
 
 function asRoutedDrawer (
   id,
@@ -41,13 +40,8 @@ const routes = createRoutesFromElements(
 
     {/* Note: Cannot nest everything undex 'posts' because index routes can't have children */}
     {/* Another option, move list to '/list' undex 'posts' */}
-    <Route path="posts" element={<PostsPage />} loader={postsPageLoader}>
-      {asRoutedDrawer(
-        'posts-settings-drawer',
-        <Route path="settings" element={<PostsSettingsDrawer />} />,
-        { retainedQueryStringParamsOnClose: ['userId'] }
-      )}
-    </Route>
+    <Route path="posts" element={<PostsPage />} loader={postsPageLoader} />
+
     <Route path="posts/:postId" element={<PostPage />} loader={postPageLoader} >
 
       {/* Drawer which shares contents */}

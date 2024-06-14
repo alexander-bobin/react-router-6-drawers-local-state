@@ -17,7 +17,6 @@ import React, {
   useState
 } from "react";
 import { Drawer as MuiDrawer } from "@mui/material";
-import useGetUrlWithCurrentSearchParams from "../utils/useGetUrlWithCurrentSearchParams";
 
 const DrawerRouteContext = createContext();
 const DrawerRouteContextProvider = DrawerRouteContext.Provider;
@@ -30,9 +29,7 @@ export default function RoutedDrawer({ id, retainedQueryStringParamsOnClose }) {
   // This let's us maintain a good closing animation.
   // If that's not important to us, we can avoid some
   // complexity.
-  const sizeRef = useRef("medium");
-
-  const closeUrl = useGetUrlWithCurrentSearchParams(".", retainedQueryStringParamsOnClose)
+  const sizeRef = useRef("medium")
 
   return (
     <DrawerRouteContextProvider
@@ -51,7 +48,7 @@ export default function RoutedDrawer({ id, retainedQueryStringParamsOnClose }) {
           // `keepMounted` is vital here. Without it, our Outlet won't
           // be mounted and so nothing will be rendered.
           keepMounted
-          onClose={() => navigate(closeUrl)}
+          onClose={() => navigate(".")}
           open={isOpen}
         >
           <div className="m-6">
