@@ -8,10 +8,6 @@ import UsersPage from './routes/UsersPage'
 import usersPageLoader from './routes/UsersPage/loader'
 import UserPage from './routes/UserPage'
 import userPageLoader from './routes/UserPage/loader'
-import UserPostDrawer from './routes/UserPostDrawer'
-import userPostDrawerLoader from './routes/UserPostDrawer/loader'
-import UserPostCommentsDrawer from './routes/UserPostCommentsDrawer'
-import userPostCommentsDrawerLoader from './routes/UserPostCommentsDrawer/loader'
 import UserAlbumDrawer from './routes/UserAlbumDrawer'
 import userAlbumDrawerLoader from './routes/UserAlbumDrawer/loader'
 import UserAlbumPhotoDrawer from './routes/UserAlbumPhotoDrawer'
@@ -50,21 +46,6 @@ const routes = createRoutesFromElements(
     <Route path="/users">
       <Route index element={<UsersPage />} loader={usersPageLoader} />
       <Route path=":userId" element={<UserPage />} loader={userPageLoader}>
-
-        {/* Stacked drawers */}
-        {asRoutedDrawer(
-          'user-post-drawer',
-          <Route path="post/:postId" element={<UserPostDrawer />} loader={userPostDrawerLoader}>
-
-            {/* Drawer which shares contents */}
-            {asRoutedDrawer(
-              'user-post-comments-drawer',
-              <Route path="comments" element={<UserPostCommentsDrawer />} loader={userPostCommentsDrawerLoader} />,
-              { size: 'small' }
-            )}
-          </Route>
-        )}
-
         {/* Stacked drawers */}
         {asRoutedDrawer(
           'user-album-drawer',
