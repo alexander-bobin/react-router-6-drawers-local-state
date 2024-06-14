@@ -3,16 +3,23 @@ import { useLoaderData, Await } from "react-router-dom";
 import LinkToDrawer from "../../common/components/LinkToDrawer";
 import PostDrawer from "../../common/components/PostDrawer";
 import useDisclosure from "../../common/utils/useDisclosure";
-import DrawerLink from "../../common/components/DrawerLink";
+import LinkButton from "../../common/components/LinkButton";
+import TasksDrawer from "./TasksDrawer";
 
 function UserPageContent ({ user }) {
+  // Note: A little awkward here on decision making. Should I create a self contained
+  // PostLink which has this inside? Or should I just do it here?
+  // Some devs may create the self contained component and then share it which would be
+  // bad. But if it becomes a PostDrawerTrigger which takes children, maybe that is OK
   const [selectedPostId, setSelectedPostId] = useState(null)
   const { getTriggerProps: getPostTriggerProps, getDisclosureProps: getPostDisclosureProps } = useDisclosure({ id: 'user-post-drawer' })
+
+  const { onOpen: onOpenTasksDrawer, getDisclosureProps: getTasksDisclosureProps } = useDisclosure({ id: 'user-tasks-drawer' })
 
   return (
     <>
       <PostDrawer {...getPostDisclosureProps({ postId: selectedPostId })} />
-
+      <TasksDrawer {...getTasksDisclosureProps({ userId: user.id })} />
 
       <h2 className="text-2xl font-bold">{user.name}</h2>
       <div className="mt-2">
@@ -21,9 +28,9 @@ function UserPageContent ({ user }) {
       </div>
       <div className="mt-8">
         <h3 className="text-xl font-bold">Tasks</h3>
-        <LinkToDrawer to="./tasks">
+        <LinkButton onClick={onOpenTasksDrawer}>
           View tasks
-        </LinkToDrawer>
+        </LinkButton>
       </div>
       <div className="mt-8">
         <h3 className="text-xl font-bold">Posts</h3>
@@ -31,9 +38,9 @@ function UserPageContent ({ user }) {
           {user?.posts?.map(post => {
             return (
               <li key={post.id} className="ml-4">
-                <DrawerLink {...getPostTriggerProps({ onClick: () => setSelectedPostId(post.id) })}>
+                <LinkButton {...getPostTriggerProps({ onClick: () => setSelectedPostId(post.id) })}>
                   {post.title}
-                </DrawerLink>
+                </LinkButton>
               </li>
             )
           })}

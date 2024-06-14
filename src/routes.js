@@ -12,11 +12,6 @@ import UserAlbumDrawer from './routes/UserAlbumDrawer'
 import userAlbumDrawerLoader from './routes/UserAlbumDrawer/loader'
 import UserAlbumPhotoDrawer from './routes/UserAlbumPhotoDrawer'
 import userAlbumPhotoDrawerLoader from './routes/UserAlbumPhotoDrawer/loader'
-import UserTasksDrawer from './routes/UserTasksDrawer'
-import UserTasksOpenDrawerTab from './routes/UserTasksOpenDrawerTab'
-import userTasksOpenDrawerTabLoader from './routes/UserTasksOpenDrawerTab/loader'
-import UserTasksCompleteDrawerTab from './routes/UserTasksCompleteDrawerTab'
-import userTasksCompleteDrawerTabLoader from './routes/UserTasksCompleteDrawerTab/loader'
 
 import PostsPage from './routes/PostsPage'
 import postsPageLoader from './routes/PostsPage/loader'
@@ -55,15 +50,6 @@ const routes = createRoutesFromElements(
               <Route path="photo/:photoId" element={<UserAlbumPhotoDrawer />} loader={userAlbumPhotoDrawerLoader} />,
               { size: 'large' }
             )}
-          </Route>
-        )}
-
-        {/* Tabbed drawer */}
-        {asRoutedDrawer(
-          'user-tasks-drawer',
-          <Route path="tasks" element={<UserTasksDrawer />}>
-            <Route index element={<UserTasksOpenDrawerTab />} loader={userTasksOpenDrawerTabLoader} />)
-            <Route path="completed" element={<UserTasksCompleteDrawerTab />} loader={userTasksCompleteDrawerTabLoader} />)
           </Route>
         )}
       </Route>
