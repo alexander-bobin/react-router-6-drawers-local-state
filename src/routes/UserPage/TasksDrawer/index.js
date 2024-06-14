@@ -11,7 +11,6 @@ function UserTaskDrawer ({ userId, isOpen, onClose, id }) {
           {tasks => (
             <UserTasksDrawerContent
               tasks={tasks}
-              userId={userId}
               onClose={onClose}
             />
           )}

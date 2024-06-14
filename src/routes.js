@@ -8,10 +8,6 @@ import UsersPage from './routes/UsersPage'
 import usersPageLoader from './routes/UsersPage/loader'
 import UserPage from './routes/UserPage'
 import userPageLoader from './routes/UserPage/loader'
-import UserAlbumDrawer from './routes/UserAlbumDrawer'
-import userAlbumDrawerLoader from './routes/UserAlbumDrawer/loader'
-import UserAlbumPhotoDrawer from './routes/UserAlbumPhotoDrawer'
-import userAlbumPhotoDrawerLoader from './routes/UserAlbumPhotoDrawer/loader'
 
 import PostsPage from './routes/PostsPage'
 import postsPageLoader from './routes/PostsPage/loader'
@@ -40,19 +36,7 @@ const routes = createRoutesFromElements(
     <Route path="/" element={<HomePage />} />
     <Route path="/users">
       <Route index element={<UsersPage />} loader={usersPageLoader} />
-      <Route path=":userId" element={<UserPage />} loader={userPageLoader}>
-        {/* Stacked drawers */}
-        {asRoutedDrawer(
-          'user-album-drawer',
-          <Route path="album/:albumId" element={<UserAlbumDrawer />} loader={userAlbumDrawerLoader}>
-            {asRoutedDrawer(
-              'user-album-photo-drawer',
-              <Route path="photo/:photoId" element={<UserAlbumPhotoDrawer />} loader={userAlbumPhotoDrawerLoader} />,
-              { size: 'large' }
-            )}
-          </Route>
-        )}
-      </Route>
+      <Route path=":userId" element={<UserPage />} loader={userPageLoader} />
     </Route>
 
     {/* Note: Cannot nest everything undex 'posts' because index routes can't have children */}

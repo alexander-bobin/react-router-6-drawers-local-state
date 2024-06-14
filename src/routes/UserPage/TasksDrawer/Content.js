@@ -17,7 +17,7 @@ function TaskList ({ tasks, isCompletedVisible }) {
   );
 }
 
-function UserTasksDrawerContent ({ onClose, userId, tasks }) {
+function UserTasksDrawerContent ({ onClose, tasks }) {
   const [isCompletedVisible, setIsCompletedVisible] = useState(false)
   return (
    <>

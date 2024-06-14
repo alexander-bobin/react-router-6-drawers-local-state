@@ -33,7 +33,6 @@ export default function RoutedDrawer({ id, retainedQueryStringParamsOnClose }) {
   const sizeRef = useRef("medium");
 
   const closeUrl = useGetUrlWithCurrentSearchParams(".", retainedQueryStringParamsOnClose)
-  console.log(`${id ? id : 'unknown-drawer'} closeUrl: ${closeUrl}`)
 
   return (
     <DrawerRouteContextProvider

@@ -1,19 +1,27 @@
-import { Suspense, useState } from "react";
-import { useLoaderData, Await } from "react-router-dom";
-import LinkToDrawer from "../../common/components/LinkToDrawer";
+import { Suspense, useCallback, useState } from "react";
+import { Await, useLoaderData } from "react-router-dom";
+import LinkButton from "../../common/components/LinkButton";
 import PostDrawer from "../../common/components/PostDrawer";
 import useDisclosure from "../../common/utils/useDisclosure";
-import LinkButton from "../../common/components/LinkButton";
 import TasksDrawer from "./TasksDrawer";
+import AlbumDrawerLink from "./AlbumDrawerLink";
 
 function UserPageContent ({ user }) {
-  // Note: A little awkward here on decision making. Should I create a self contained
-  // PostLink which has this inside? Or should I just do it here?
-  // Some devs may create the self contained component and then share it which would be
-  // bad. But if it becomes a PostDrawerTrigger which takes children, maybe that is OK
+  // Note: With the post drawer we should what it would be like to have the drawer at the page level
+  // That is, just one drawer on the page.
+  // With the album drawer we have it at the link level. That is, many drawers on the page.
+  // Maybe the below code could be balled up into a `useSelectedItemDrawer`?
   const [selectedPostId, setSelectedPostId] = useState(null)
-  const { getTriggerProps: getPostTriggerProps, getDisclosureProps: getPostDisclosureProps } = useDisclosure({ id: 'user-post-drawer' })
+  const onPostClick = useCallback((postId) => () => setSelectedPostId(postId), [setSelectedPostId])
+  const onPostDrawerClose = useCallback(() => setSelectedPostId(null), [setSelectedPostId])
+  const { getDisclosureProps: getPostDisclosureProps } = useDisclosure({
+    id: 'user-post-drawer',
+    isOpen: selectedPostId !== null,
+    onClose: onPostDrawerClose,
+  })
 
+  // Note: Notice how when we are selecting an item we use useDisclosure as controlled but
+  // when no item is required we can go uncontrolled
   const { onOpen: onOpenTasksDrawer, getDisclosureProps: getTasksDisclosureProps } = useDisclosure({ id: 'user-tasks-drawer' })
 
   return (
@@ -38,7 +46,7 @@ function UserPageContent ({ user }) {
           {user?.posts?.map(post => {
             return (
               <li key={post.id} className="ml-4">
-                <LinkButton {...getPostTriggerProps({ onClick: () => setSelectedPostId(post.id) })}>
+                <LinkButton onClick={onPostClick(post.id)}>
                   {post.title}
                 </LinkButton>
               </li>
@@ -51,9 +59,9 @@ function UserPageContent ({ user }) {
         <ul className="mt-2 list-disc">
           {user?.albums?.map(album => (
             <li key={album.id} className="ml-4">
-              <LinkToDrawer to={`./album/${album.id}`}>
+              <AlbumDrawerLink albumId={album.id}>
                 {album.title}
-              </LinkToDrawer>
+              </AlbumDrawerLink>
             </li>
           ))}
         </ul>
