@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-router-6-drawers-local-state/static/css/main.ec9820e5.css",
-    "main.js": "/react-router-6-drawers-local-state/static/js/main.03157cff.js",
+    "main.js": "/react-router-6-drawers-local-state/static/js/main.7d6c7f7b.js",
     "static/js/453.1ddf69ae.chunk.js": "/react-router-6-drawers-local-state/static/js/453.1ddf69ae.chunk.js",
     "index.html": "/react-router-6-drawers-local-state/index.html",
     "main.ec9820e5.css.map": "/react-router-6-drawers-local-state/static/css/main.ec9820e5.css.map",
-    "main.03157cff.js.map": "/react-router-6-drawers-local-state/static/js/main.03157cff.js.map",
+    "main.7d6c7f7b.js.map": "/react-router-6-drawers-local-state/static/js/main.7d6c7f7b.js.map",
     "453.1ddf69ae.chunk.js.map": "/react-router-6-drawers-local-state/static/js/453.1ddf69ae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ec9820e5.css",
-    "static/js/main.03157cff.js"
+    "static/js/main.7d6c7f7b.js"
   ]
 }
