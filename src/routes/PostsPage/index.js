@@ -1,13 +1,24 @@
-import { Suspense } from "react";
-import { Await, Link, useLoaderData, Outlet } from "react-router-dom";
-import UsersFilter from "./UsersFilter";
+import { Suspense, useCallback, useState } from "react";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import LinkButton from "../../common/components/LinkButton";
-import PostsSettingsDrawer from "./SettingsDrawer";
+import PostDrawer from "../../common/components/PostDrawer";
 import useDisclosure from "../../common/utils/useDisclosure";
+import PostsSettingsDrawer from "./SettingsDrawer";
+import UsersFilter from "./UsersFilter";
 
 function PostList ({ posts }) {
+  const [selectedPostId, setSelectedPostId] = useState(null)
+  const onPostClick = useCallback((postId) => () => setSelectedPostId(postId), [setSelectedPostId])
+  const onPostDrawerClose = useCallback(() => setSelectedPostId(null), [setSelectedPostId])
+  const { getDisclosureProps } = useDisclosure({
+    id: 'post-page-post-drawer',
+    isOpen: selectedPostId !== null,
+    onClose: onPostDrawerClose,
+  })
+
   return (
     <>
+      <PostDrawer {...getDisclosureProps({ postId: selectedPostId })} />
       <div>
         <UsersFilter />
       </div>
@@ -16,7 +27,10 @@ function PostList ({ posts }) {
           <li key={post.id}>
             <Link to={`./${post.id}`} className="text-blue-500 hover:underline">
               {post.title}
-            </Link>
+            </Link>{' '}
+            (<LinkButton onClick={onPostClick(post.id)}>
+              quick view
+            </LinkButton>)
           </li>
         ))}
       </ul>
@@ -42,7 +56,6 @@ function PostsPage () {
           </Await>
         </Suspense>
       </div>
-      <Outlet />
     </>
   );
 }
