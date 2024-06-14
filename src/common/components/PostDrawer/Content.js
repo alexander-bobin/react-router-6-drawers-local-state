@@ -2,7 +2,7 @@ import DrawerHeader from "../DrawerHeader"
 import TextWithNewLines from "../TextWithNewLines"
 import useDisclosure from "../../utils/useDisclosure"
 import CommentsDrawer from "../CommentsDrawer"
-import DrawerLink from "../LinkToDrawer"
+import LinkButton from "../LinkButton"
 
 function PostDrawerContent ({ onClose, post, drawerId }) {
   // Note: Awkwardness here. We need a canonical id for the drawer for analytics purposes
@@ -18,7 +18,7 @@ function PostDrawerContent ({ onClose, post, drawerId }) {
       <DrawerHeader category="Post" title={post.title} onClose={onClose} />
       <p><TextWithNewLines text={post.body} /></p>
       <p className="mt-4">
-        <DrawerLink {...getTriggerProps()}>View comments</DrawerLink>
+        <LinkButton {...getTriggerProps()}>View comments</LinkButton>
       </p>
     </>
   )
